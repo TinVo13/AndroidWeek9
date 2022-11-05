@@ -40,30 +40,28 @@ export default function App() {
     if (touch === randomNumber) {
       Alert.alert('Hoan thanh', 'Da bat duoc chuot');
     } else {
-      Animated.sequence([
-        Animated.parallel([
-          Animated.timing(chuot1, {
-            toValue: {
-              x: Math.random() * (width - 100) + 1,
-              y: Math.random() * (height - 100) + 1,
-            }, duration: 500,
-            useNativeDriver: false
-          }),
-          Animated.timing(chuot2, {
-            toValue: {
-              x: Math.random() * (width - 100) + 1,
-              y: Math.random() * (height - 100) + 1,
-            }, duration: 500,
-            useNativeDriver: false
-          }),
-          Animated.timing(chuot3, {
-            toValue: {
-              x: Math.random() * (width - 100) + 1,
-              y: Math.random() * (height - 100) + 1,
-            }, duration: 500,
-            useNativeDriver: false
-          })
-        ]),
+      Animated.parallel([
+        Animated.timing(chuot1, {
+          toValue: {
+            x: Math.random() * (width - 100) + 1,
+            y: Math.random() * (height - 100) + 1,
+          }, duration: 500,
+          useNativeDriver: false
+        }),
+        Animated.timing(chuot2, {
+          toValue: {
+            x: Math.random() * (width - 100) + 1,
+            y: Math.random() * (height - 100) + 1,
+          }, duration: 500,
+          useNativeDriver: false
+        }),
+        Animated.timing(chuot3, {
+          toValue: {
+            x: Math.random() * (width - 100) + 1,
+            y: Math.random() * (height - 100) + 1,
+          }, duration: 500,
+          useNativeDriver: false
+        })
       ]).start();
     }
   }
