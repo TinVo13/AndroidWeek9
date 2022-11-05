@@ -1,24 +1,55 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { Animated, Dimensions, StyleSheet, Text, View } from 'react-native';
+import { useRef, useState } from 'react';
+import { Animated, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function App() {
-  const [location, setLocation] = useState({
-    x: null,
-    y: null,
-    Top: new Animated.Value(10),
-    Left: new Animated.Value(10),
-  })
-  const { Top, Left } = location;
+  const chuot1 = useRef(new Animated.ValueXY({
+    x: 0,
+    y: 0
+  })).current;
+  const chuot2 = useRef(new Animated.ValueXY({
+    x: 0,
+    y: 0
+  })).current;
+  const chuot3 = useRef(new Animated.ValueXY({
+    x: 0,
+    y: 0
+  })).current;
+
   function random(evt) {
-    var setx = 1 + Math.random() * (height - 1);
-    var sety = 1 + Math.random() * (width - 1);
-    setLocation({
-      x: setx,
-      y: sety,
-      Top: setx - 30,
-      Left: sety - 30,
-    })
+    Animated.timing(
+      chuot1,
+      {
+        toValue:
+        {
+          x: Math.floor(Math.random()*(width-100))+1,
+          y: Math.floor(Math.random()*(height-100))+1,
+        },
+        duration: 1000,
+        useNativeDriver: false,
+      }).start();
+    Animated.timing(
+      chuot2,
+      {
+        toValue:
+        {
+          x: Math.floor(Math.random()*(width-100))+1,
+          y: Math.floor(Math.random()*(height-100))+1,
+        },
+        duration: 1000,
+        useNativeDriver: false,
+      }).start();
+    Animated.timing(
+      chuot3,
+      {
+        toValue:
+        {
+          x: Math.floor(Math.random()*(width-100))+1,
+          y: Math.floor(Math.random()*(height-100))+1,
+        },
+        duration: 1000,
+        useNativeDriver: false,
+      }).start();
   }
   var height = Dimensions.get('window').height;
   var width = Dimensions.get('window').width;
@@ -27,9 +58,9 @@ export default function App() {
       onStartShouldSetResponder={() => true}
       onMoveShouldSetResponder={() => true}
       onResponderGrant={random}>
-      <Animated.Image source={require('./assets/mouse.gif')} style={{ width: 100, height: 100, marginLeft: Left * Math.random(), marginTop: Top * Math.random(), position: 'relative' }}></Animated.Image>
-      <Animated.Image source={require('./assets/mouse.gif')} style={{ width: 100, height: 100, marginLeft: Left * Math.random(), marginTop: Top * Math.random(), position: 'relative' }}></Animated.Image>
-      <Animated.Image source={require('./assets/mouse.gif')} style={{ width: 100, height: 100, marginLeft: Left * Math.random(), marginTop: Top * Math.random(), position: 'relative' }}></Animated.Image>
+      <Animated.Image source={require('./assets/mouse.gif')} style={[{ width: 100, height: 100, }, chuot1.getLayout()]}></Animated.Image>
+      <Animated.Image source={require('./assets/mouse.gif')} style={[{ width: 100, height: 100, }, chuot2.getLayout()]}></Animated.Image>
+      <Animated.Image source={require('./assets/mouse.gif')} style={[{ width: 100, height: 100, }, chuot3.getLayout()]}></Animated.Image>
     </View>
   );
 }
